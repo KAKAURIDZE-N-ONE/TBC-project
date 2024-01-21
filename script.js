@@ -138,7 +138,7 @@ function handleResizeScreen() {
 
   windowWidth = width;
 
-  if (windowWidth <= 520) updateQuestions();
+  if (windowWidth <= 340) updateQuestions();
 }
 
 window.addEventListener('resize', handleResizeScreen);

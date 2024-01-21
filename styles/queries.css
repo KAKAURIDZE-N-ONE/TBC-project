@@ -101,8 +101,13 @@
   .partners-section-header {
     font-size: 1.8rem;
   }
-  /* //////////////////////////slider///////////////////////////////////
-  ////////////////////////////////////////////////////////////////// */
+  /* //////////////////////////slider///////////////////////////////////*/
+
+  .partner-arrow {
+    display: none;
+  }
+
+  /*  ////////////////////////////////////////////////////////////////// */
 
   .frequent-questions-section {
     padding-top: 5rem;
@@ -126,5 +131,35 @@
 
   .questions-container-and-header {
     padding: 0;
+  }
+
+  .all-question {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-top: 6rem;
+  }
+
+  .txt-us-btn {
+    position: unset;
+    font-size: 1.6rem;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .ytb-fc-logos-cont {
+    margin-left: auto;
+    gap: 1.5rem;
+  }
+
+  .footer-logo {
+    height: 3.5rem;
+    width: 3.5rem;
+  }
+
+  .footer {
+    display: none;
+  }
+
+  .mobile-footer {
+    display: inline-block;
   }
 }
