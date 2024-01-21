@@ -1,0 +1,111 @@
+@media (max-width: 520px) {
+  .main-section {
+    padding: 0 2rem;
+  }
+
+  .nav-bar-backround-div {
+    height: 6.9rem;
+  }
+
+  .nav-bar-box {
+    height: 6.9rem;
+  }
+
+  .TBC-logo {
+    width: 13rem;
+    height: 2.9rem;
+    margin-left: 2rem;
+  }
+
+  .main-header {
+    padding-top: 5rem;
+    font-size: 2.4rem;
+  }
+
+  .secondary-header {
+    font-size: 2.2rem;
+    margin-top: 0;
+    line-height: 4rem;
+  }
+
+  .nav-bar-ul {
+    display: none;
+  }
+
+  .hero-section {
+    height: 21.7rem;
+  }
+
+  .learn-more-section {
+    padding-top: 3rem;
+    padding-bottom: 4.6rem;
+  }
+
+  .learn-more-section div p {
+    font-size: 1.6rem;
+    line-height: 2.5rem;
+    letter-spacing: 0px;
+    font-weight: 400;
+  }
+
+  .learn-more-section div a {
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .learning-courses-section {
+    padding-top: 2rem;
+    padding-bottom: 4.4rem;
+  }
+
+  .courses-container {
+    grid-template-columns: repeat(1, 1fr);
+    margin-top: 3rem;
+  }
+
+  .course {
+    width: 28rem;
+    justify-self: center;
+    height: 29rem;
+  }
+
+  .course-header {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    letter-spacing: 0px;
+  }
+
+  .course-description {
+    width: 90%;
+  }
+
+  .course-description h2 {
+    margin-top: 1.5rem;
+  }
+
+  .course-description h2 {
+    margin-top: 1.5rem;
+  }
+
+  .course-description div h1 {
+    font-size: 1.4rem;
+  }
+
+  .partners-section {
+    padding-top: 2.3rem;
+  }
+
+  .partners-section-header {
+    font-size: 1.8rem;
+  }
+  /* //////////////////////////slider///////////////////////////////////
+  ////////////////////////////////////////////////////////////////// */
+
+  .questions-section-header {
+    font-size: 2rem;
+  }
+
+  .questions-container-and-header {
+    padding: 0;
+  }
+}
