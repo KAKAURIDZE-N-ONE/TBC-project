@@ -1,5 +1,3 @@
-const a = 21;
-
 const navBar = document.querySelector('.nav-bar-box');
 
 const questionFixedHeigh = 80;
@@ -44,14 +42,15 @@ function autoSwitchingOn() {
 }
 
 const rightArrow = document.querySelector('.partner-right-arrow');
-rightArrow.addEventListener('click', function () {
-  autoSwitchingIsPauesed = true;
-  setTimeout(autoSwitchingOn, 8000);
+if (rightArrow)
+  rightArrow.addEventListener('click', function () {
+    autoSwitchingIsPauesed = true;
+    setTimeout(autoSwitchingOn, 8000);
 
-  selectedPartnersPage++;
-  updatePartnerImgs();
-  updateNavDots();
-});
+    selectedPartnersPage++;
+    updatePartnerImgs();
+    updateNavDots();
+  });
 
 const leftArrow = document.querySelector('.partner-left-arrow');
 leftArrow.addEventListener('click', function () {
@@ -129,6 +128,7 @@ questions.forEach((el, i) => {
 
 /////////////////////////////for questions/////////////////////////////
 let windowWidth;
+const questionsSection = document.querySelector('.frequent-questions-section');
 
 function handleResizeScreen() {
   width =
@@ -147,5 +147,7 @@ handleResizeScreen();
 
 function updateQuestions() {
   const allQuestionTxt = document.querySelector('.all-question');
+  console.log(questionsSection, allQuestionTxt);
   if (allQuestionTxt) allQuestionTxt.remove();
+  questionsSection.append(allQuestionTxt);
 }

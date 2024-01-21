@@ -1,4 +1,7 @@
-@media (max-width: 520px) {
+@media (max-width: 340px) {
+  * {
+    max-width: 320px;
+  }
   .main-section {
     padding: 0 2rem;
   }
@@ -101,8 +104,24 @@
   /* //////////////////////////slider///////////////////////////////////
   ////////////////////////////////////////////////////////////////// */
 
+  .frequent-questions-section {
+    padding-top: 5rem;
+  }
+
   .questions-section-header {
     font-size: 2rem;
+  }
+
+  .questions {
+    margin-top: 1rem;
+  }
+
+  .question-txt {
+    font-size: 1.6rem;
+  }
+
+  .question-txt-and-arrow-box {
+    align-items: center;
   }
 
   .questions-container-and-header {
