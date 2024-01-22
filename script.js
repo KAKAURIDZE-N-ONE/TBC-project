@@ -1,3 +1,7 @@
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+};
+
 const navBar = document.querySelector('.nav-bar-box');
 const mobileNavButton = document.querySelector('.menu-button-for-mobile');
 
@@ -140,7 +144,7 @@ questions.forEach((el, i) => {
 
     if (Number(activeQuestionHeight) === questionFixedHeigh) {
       activeQuestion.style.height = `${
-        activeQuestionAnswerHeight / 10 + 12.5
+        activeQuestionAnswerHeight / 10 + 11.5
       }rem`;
       activeArrow.classList.add('question-arrow-rotate');
     }
@@ -148,7 +152,11 @@ questions.forEach((el, i) => {
 });
 
 /////////////////////////////for questions/////////////////////////////
+const allQuestionTxt = document.querySelector('.all-question');
 const questionsSection = document.querySelector('.frequent-questions-section');
+const flexContainerForAllQuestion = document.querySelector(
+  '.flex-container-for-all-question'
+);
 
 function handleResizeScreen() {
   width =
@@ -158,15 +166,20 @@ function handleResizeScreen() {
 
   windowWidth = width;
 
-  if (windowWidth <= 340) updateQuestions();
+  if (width <= 340) updateQuestionsForMobile();
+  else updateQuestionsForComputer();
 }
 
 window.addEventListener('resize', handleResizeScreen);
 
 handleResizeScreen();
 
-function updateQuestions() {
-  const allQuestionTxt = document.querySelector('.all-question');
+function updateQuestionsForComputer() {
+  if (allQuestionTxt) allQuestionTxt.remove();
+  flexContainerForAllQuestion.append(allQuestionTxt);
+}
+
+function updateQuestionsForMobile() {
   if (allQuestionTxt) allQuestionTxt.remove();
   questionsSection.append(allQuestionTxt);
 }
@@ -219,15 +232,15 @@ function hamburgerMenuAnimations() {
     MobileNavButtonCenterPiece.style.backgroundColor = '#dbdbdb';
     MobileNavButtonBottomPiece.style.backgroundColor = '#dbdbdb';
 
-    hamburgerMenuList.style.right = '25rem';
+    hamburgerMenuList.style.right = '21.8rem';
 
-    hamburgerMenu.style.right = '-100%';
-    hamburgerMenu.style.transform = 'translate(-50%,0)';
-
-    // hamburgerMenuList.style.marginRight = '10rem';
+    hamburgerMenu.style.right = '-20rem';
+    hamburgerMenu.style.backgroundColor = '#ffffff00';
 
     throwAwayDarkBackground();
     hamburgerMenuDarkBackground.style.backgroundColor = '#ffffff00';
+
+    mobileNavButton.style.zIndex = '3';
   } else {
     mobileNavButtonIsActive = true;
 
@@ -251,8 +264,13 @@ function hamburgerMenuAnimations() {
 
     hamburgerMenu.style.right = '0';
     hamburgerMenu.style.transform = 'translate(0,0)';
+    hamburgerMenu.style.backgroundColor = '#212121';
+
+    hamburgerMenuList.style.right = '1.8rem';
 
     hamburgerMenuDarkBackground.style.left = '0%';
     hamburgerMenuDarkBackground.style.backgroundColor = '#1616169e';
+
+    mobileNavButton.style.zIndex = '4';
   }
 }
