@@ -40,7 +40,8 @@ screenScrolledpixels();
 //////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 let selectedPartnersPage = 0;
-let autoSwitchingIsPauesed = false;
+let autoSwitchingIsPauesed = true;
+let oldSelectedPartnersPage;
 
 const navDots = document.querySelectorAll('.dot');
 const partnerImgs = document.querySelectorAll('.partner-img');
@@ -57,8 +58,11 @@ navDots.forEach((el, i) => {
     setTimeout(autoSwitchingOn, 8000);
 
     selectedPartnersPage = i;
+
+    slideLeftOrRight(oldSelectedPartnersPage, selectedPartnersPage);
     updatePartnerImgs();
     updateNavDots();
+    oldSelectedPartnersPage = selectedPartnersPage;
   });
 });
 
@@ -78,23 +82,25 @@ if (rightArrow)
   });
 
 const leftArrow = document.querySelector('.partner-left-arrow');
-leftArrow.addEventListener('click', function () {
-  autoSwitchingIsPauesed = true;
-  setTimeout(autoSwitchingOn, 8000);
+if (leftArrow)
+  leftArrow.addEventListener('click', function () {
+    autoSwitchingIsPauesed = true;
+    setTimeout(autoSwitchingOn, 8000);
 
-  selectedPartnersPage--;
-  updatePartnerImgs();
-  updateNavDots();
-});
+    selectedPartnersPage--;
+    updatePartnerImgs();
+    updateNavDots();
+  });
 
 function updateTimeWithInterval() {
   if (autoSwitchingIsPauesed) return;
   selectedPartnersPage++;
+
   updatePartnerImgs();
   updateNavDots();
 }
 
-setInterval(updateTimeWithInterval, 3000);
+// setInterval(updateTimeWithInterval, 3000);
 
 function updatePartnerImgs() {
   if (selectedPartnersPage === -1) selectedPartnersPage = 2;
@@ -124,6 +130,61 @@ partnerArrows.forEach(el => {
     el.src = 'svgs/partner-arrow.svg';
   });
 });
+
+////////////////////////////partners animation for mobile/////////////////////
+let switchSide;
+
+const slidersContainer = document.querySelector(
+  '.partners-container-for-mobile'
+);
+
+function slideLeftOrRight(oldValue, newValue) {
+  if (newValue - oldValue > 0) {
+    switchSide = 'right';
+    updateSlider(switchSide);
+  }
+  if (newValue - oldValue < 0) {
+    switchSide = 'left';
+    updateSlider(switchSide);
+  }
+}
+
+function updateSlider(side) {
+  const partnersCenterBox = document.querySelector('.partners-center-box');
+
+  if (side === 'right') {
+    const partnersRightBox = document.createElement('div');
+    partnersRightBox.classList.add('partners-right-box');
+    slidersContainer.append(partnersRightBox);
+
+    setTimeout(function () {
+      partnersRightBox.classList.remove('partners-right-box');
+      partnersRightBox.classList.add('partners-center-box');
+      partnersCenterBox.classList.remove('partners-center-box');
+      partnersCenterBox.classList.add('partners-left-box');
+    }, 10);
+    setTimeout(function () {
+      partnersCenterBox.remove();
+    }, 1000);
+  }
+  if (side === 'left') {
+    const partnersLeftBox = document.createElement('div');
+    partnersLeftBox.classList.add('partners-left-box');
+    slidersContainer.prepend(partnersLeftBox);
+
+    setTimeout(function () {
+      partnersLeftBox.classList.remove('partners-left-box');
+      partnersLeftBox.classList.add('partners-center-box');
+      partnersCenterBox.classList.remove('partners-center-box');
+      partnersCenterBox.classList.add('partners-right-box');
+    }, 10);
+    setTimeout(function () {
+      partnersCenterBox.remove();
+    }, 1000);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
 const questions = document.querySelectorAll('.question-txt-and-arrow-box');
@@ -186,6 +247,7 @@ function updateQuestionsForMobile() {
 
 ////////////////mobile nav button animation and hamburger menu/////////////////////////////////////////////////
 let mobileNavButtonIsActive = false;
+let customerCanClickNavButton = true;
 
 const hamburgerMenuList = document.querySelector('.hamburger-menu-list');
 
@@ -199,19 +261,23 @@ const MobileNavButtonTopPiece = document.querySelector('.top-piece');
 const MobileNavButtonCenterPiece = document.querySelector('.center-piece');
 const MobileNavButtonBottomPiece = document.querySelector('.bottom-piece');
 
-mobileNavButton.addEventListener('click', hamburgerMenuAnimations);
+mobileNavButton.addEventListener('click', function () {
+  hamburgerMenuAnimations();
+});
 hamburgerMenuDarkBackground.addEventListener('click', function () {
   hamburgerMenuAnimations();
 });
 
 function throwAwayDarkBackground() {
+  customerCanClickNavButton = false;
   const timeout = setTimeout(function () {
     hamburgerMenuDarkBackground.style.left = '-100%';
-  }, 800);
+    customerCanClickNavButton = true;
+  }, 600);
 }
 
 function hamburgerMenuAnimations() {
-  console.log(mobileNavButtonIsActive);
+  if (!customerCanClickNavButton) return;
 
   if (mobileNavButtonIsActive) {
     mobileNavButtonIsActive = false;
