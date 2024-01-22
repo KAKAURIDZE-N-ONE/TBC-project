@@ -162,4 +162,8 @@
   .mobile-footer {
     display: inline-block;
   }
+
+  .menu-button-for-mobile {
+    display: inline-block;
+  }
 }

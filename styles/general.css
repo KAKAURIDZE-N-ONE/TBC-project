@@ -15,6 +15,59 @@ body {
   overflow-x: hidden;
 }
 
+header {
+  position: relative;
+}
+
+.menu-button-for-mobile {
+  position: fixed;
+  right: 2.2rem;
+  top: 2.3rem;
+  width: 2.6rem;
+  height: 2.1rem;
+  z-index: 2;
+  transition: all 0.3s;
+}
+
+.pieces-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.top-piece {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #dbdbdb;
+  height: 0.3rem;
+  width: 50%;
+  transition: all 0.3s;
+  border-radius: 100px;
+}
+
+.center-piece {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  background-color: #dbdbdb;
+  height: 0.3rem;
+  width: 100%;
+  transition: all 0.3s;
+  border-radius: 100px;
+}
+
+.bottom-piece {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #dbdbdb;
+  height: 0.3rem;
+  width: 50%;
+  transition: all 0.3s;
+  border-radius: 100px;
+}
+
 .main-section {
   max-width: 98rem;
   margin: 0 auto;

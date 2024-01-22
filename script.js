@@ -151,3 +151,42 @@ function updateQuestions() {
   if (allQuestionTxt) allQuestionTxt.remove();
   questionsSection.append(allQuestionTxt);
 }
+
+////////////////mobile nav button animation/////////////////////////////////////////////////
+let mobileNavButtonIsActive = false;
+
+const mobileNavButton = document.querySelector('.menu-button-for-mobile');
+const MobileNavButtonTopPiece = document.querySelector('.top-piece');
+const MobileNavButtonCenterPiece = document.querySelector('.center-piece');
+const MobileNavButtonBottomPiece = document.querySelector('.bottom-piece');
+
+mobileNavButton.addEventListener('click', function () {
+  if (mobileNavButtonIsActive) {
+    mobileNavButtonIsActive = false;
+
+    mobileNavButton.style.transform = 'rotate(0deg)';
+
+    MobileNavButtonTopPiece.style.left = '0';
+    MobileNavButtonTopPiece.style.top = '0';
+    MobileNavButtonTopPiece.style.transform = 'unset';
+
+    MobileNavButtonBottomPiece.style.right = '0';
+    MobileNavButtonBottomPiece.style.bottom = '0';
+    MobileNavButtonBottomPiece.style.transform = 'unset';
+  } else {
+    mobileNavButtonIsActive = true;
+
+    mobileNavButton.style.transform = 'rotate(-45deg)';
+
+    MobileNavButtonTopPiece.style.left = '50%';
+    MobileNavButtonTopPiece.style.top = '11.47%';
+    MobileNavButtonTopPiece.style.transform =
+      'translate(-50%,0) rotate(-90deg)';
+
+    MobileNavButtonBottomPiece.style.right = '50%';
+    MobileNavButtonBottomPiece.style.bottom = '11.47%';
+    MobileNavButtonBottomPiece.style.transform =
+      'translate(50%,0) rotate(-90deg)';
+  }
+});
+////////////////////////////////////////////////////////////////////////////////////////////

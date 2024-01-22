@@ -431,3 +431,7 @@
 .tbc-logo-img-mobile {
   width: 10.4rem;
 }
+
+.menu-button-for-mobile {
+  display: none;
+}
