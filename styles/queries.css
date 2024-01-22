@@ -127,6 +127,11 @@
 
   .question-txt-and-arrow-box {
     align-items: center;
+    padding: 1.8rem 0;
+  }
+
+  .question-answer {
+    font-size: 1.4rem;
   }
 
   .questions-container-and-header {
