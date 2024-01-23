@@ -40,8 +40,8 @@ screenScrolledpixels();
 //////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 let selectedPartnersPage = 0;
-let autoSwitchingIsPauesed = true;
-let oldSelectedPartnersPage;
+let autoSwitchingIsPauesed = false;
+let oldSelectedPartnersPage = 0;
 
 const navDots = document.querySelectorAll('.dot');
 const partnerImgs = document.querySelectorAll('.partner-img');
@@ -95,12 +95,14 @@ if (leftArrow)
 function updateTimeWithInterval() {
   if (autoSwitchingIsPauesed) return;
   selectedPartnersPage++;
+  console.log(selectedPartnersPage);
 
   updatePartnerImgs();
   updateNavDots();
+  slideLeftOrRight(selectedPartnersPage - 1, selectedPartnersPage);
 }
 
-// setInterval(updateTimeWithInterval, 3000);
+setInterval(updateTimeWithInterval, 3000);
 
 function updatePartnerImgs() {
   if (selectedPartnersPage === -1) selectedPartnersPage = 2;
@@ -141,20 +143,55 @@ const slidersContainer = document.querySelector(
 function slideLeftOrRight(oldValue, newValue) {
   if (newValue - oldValue > 0) {
     switchSide = 'right';
-    updateSlider(switchSide);
+    updateSlider(switchSide, newValue);
   }
   if (newValue - oldValue < 0) {
     switchSide = 'left';
-    updateSlider(switchSide);
+    updateSlider(switchSide, newValue);
   }
 }
 
-function updateSlider(side) {
+function updateSlider(side, pageIndex) {
   const partnersCenterBox = document.querySelector('.partners-center-box');
 
   if (side === 'right') {
     const partnersRightBox = document.createElement('div');
     partnersRightBox.classList.add('partners-right-box');
+
+    const partnersMobileImgs = Array.from({ length: 3 }, () =>
+      document.createElement('img')
+    ).map((image, imgIndex) => {
+      console.log(image);
+      image.classList.add('partners-mobile-img');
+      partnersRightBox.append(image);
+      if (pageIndex === 0) {
+        image.src = `/TBC-project/imgs/partners/${
+          imgIndex === 0
+            ? 'usaid.webp'
+            : imgIndex === 1
+            ? 'space int.webp'
+            : 'tineti.webp'
+        }`;
+        image.style.width =
+          imgIndex === 0 ? '21.9rem' : imgIndex === 1 ? '20rem' : '25rem';
+      }
+      if (pageIndex === 1) {
+        image.src = `/TBC-project/imgs/partners/${
+          imgIndex === 0
+            ? 'tegeta.webp'
+            : imgIndex === 1
+            ? 'spectre.webp'
+            : 'tibisi.webp'
+        }`;
+        image.style.width =
+          imgIndex === 0 ? '18rem' : imgIndex === 1 ? '13.1rem' : '22rem';
+      }
+      if (pageIndex === 2 && imgIndex === 1) {
+        image.src = '/TBC-project/imgs/partners/ufc.webp';
+        image.style.width = '23.2rem';
+      }
+    });
+
     slidersContainer.append(partnersRightBox);
 
     setTimeout(function () {
@@ -170,6 +207,41 @@ function updateSlider(side) {
   if (side === 'left') {
     const partnersLeftBox = document.createElement('div');
     partnersLeftBox.classList.add('partners-left-box');
+
+    const partnersMobileImgs = Array.from({ length: 3 }, () =>
+      document.createElement('img')
+    ).map((image, imgIndex) => {
+      console.log(image);
+      image.classList.add('partners-mobile-img');
+      partnersLeftBox.append(image);
+      if (pageIndex === 0) {
+        image.src = `/TBC-project/imgs/partners/${
+          imgIndex === 0
+            ? 'usaid.webp'
+            : imgIndex === 1
+            ? 'space int.webp'
+            : 'tineti.webp'
+        }`;
+        image.style.width =
+          imgIndex === 0 ? '21.9rem' : imgIndex === 1 ? '20rem' : '25rem';
+      }
+      if (pageIndex === 1) {
+        image.src = `/TBC-project/imgs/partners/${
+          imgIndex === 0
+            ? 'tegeta.webp'
+            : imgIndex === 1
+            ? 'spectre.webp'
+            : 'tibisi.webp'
+        }`;
+        image.style.width =
+          imgIndex === 0 ? '18rem' : imgIndex === 1 ? '13.1rem' : '22rem';
+      }
+      if (pageIndex === 2 && imgIndex === 1) {
+        image.src = '/TBC-project/imgs/partners/ufc.webp';
+        image.style.width = '23.2rem';
+      }
+    });
+
     slidersContainer.prepend(partnersLeftBox);
 
     setTimeout(function () {
