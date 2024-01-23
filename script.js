@@ -41,7 +41,37 @@ screenScrolledpixels();
 ///////////////////////////////////////////////////////////////////
 let selectedPartnersPage = 0;
 let autoSwitchingIsPauesed = false;
+let draggingIsPaused = false;
 let oldSelectedPartnersPage = 0;
+
+// ამ ყველაფერს ვანიჭებ ლისთენერს, რათა მაუს ენთერის დროს აუტომატური სლაიდების გადასვლა გაითიშოს
+// და ამავდროულად შეინარჩუნონ თავიანთი ფუნქციები, რადგან ზოგი მათგანის პოზიცია აბსოლუტია და z-index_ით
+// არიან წინ გადმოწეულნი
+
+const divForAutoSwitchingPause = document.querySelector(
+  '.div-for-auto-switching-pause'
+);
+const partnerArrows = document.querySelectorAll('.partner-arrow');
+const dotsBox = document.querySelector('.dots-for-navigation-partners');
+
+function handleMouseEnter() {
+  autoSwitchingIsPauesed = true;
+}
+
+function handleMouseLeave() {
+  autoSwitchingIsPauesed = false;
+}
+
+divForAutoSwitchingPause.addEventListener('mouseenter', handleMouseEnter);
+divForAutoSwitchingPause.addEventListener('mouseleave', handleMouseLeave);
+partnerArrows[0].addEventListener('mouseenter', handleMouseEnter);
+partnerArrows[0].addEventListener('mouseleave', handleMouseLeave);
+partnerArrows[1].addEventListener('mouseenter', handleMouseEnter);
+partnerArrows[1].addEventListener('mouseleave', handleMouseLeave);
+dotsBox.addEventListener('mouseenter', handleMouseEnter);
+dotsBox.addEventListener('mouseleave', handleMouseLeave);
+//////////////////////////////////////////////////////////////////////////////////////////////////
+let turnedOffPartnersArrowsButton = false;
 
 const navDots = document.querySelectorAll('.dot');
 const partnerImgs = document.querySelectorAll('.partner-img');
@@ -52,57 +82,64 @@ const partnerImgs3 = document.querySelectorAll('.partner-img-3');
 updatePartnerImgs();
 updateNavDots();
 
+let delayAutoSwitching;
+
 navDots.forEach((el, i) => {
   el.addEventListener('click', function () {
-    autoSwitchingIsPauesed = true;
-    setTimeout(autoSwitchingOn, 8000);
+    if (draggingIsPaused) return;
 
+    oldSelectedPartnersPage = selectedPartnersPage;
     selectedPartnersPage = i;
 
     slideLeftOrRight(oldSelectedPartnersPage, selectedPartnersPage);
     updatePartnerImgs();
     updateNavDots();
-    oldSelectedPartnersPage = selectedPartnersPage;
+    clearTimeout(delayAutoSwitching);
+    delayAutoSwitching = setTimeout(
+      () => (autoSwitchingIsPauesed = false),
+      6000
+    );
   });
 });
-
-function autoSwitchingOn() {
-  autoSwitchingIsPauesed = false;
-}
 
 const rightArrow = document.querySelector('.partner-right-arrow');
 if (rightArrow)
   rightArrow.addEventListener('click', function () {
-    autoSwitchingIsPauesed = true;
-    setTimeout(autoSwitchingOn, 8000);
+    if (turnedOffPartnersArrowsButton) return;
 
+    oldSelectedPartnersPage = selectedPartnersPage;
     selectedPartnersPage++;
     updatePartnerImgs();
     updateNavDots();
+
+    turnedOffPartnersArrowsButton = true;
+    setTimeout(() => (turnedOffPartnersArrowsButton = false), 1000);
   });
 
 const leftArrow = document.querySelector('.partner-left-arrow');
 if (leftArrow)
   leftArrow.addEventListener('click', function () {
-    autoSwitchingIsPauesed = true;
-    setTimeout(autoSwitchingOn, 8000);
+    if (turnedOffPartnersArrowsButton) return;
 
+    oldSelectedPartnersPage = selectedPartnersPage;
     selectedPartnersPage--;
     updatePartnerImgs();
     updateNavDots();
+
+    turnedOffPartnersArrowsButton = true;
+    setTimeout(() => (turnedOffPartnersArrowsButton = false), 1000);
   });
 
 function updateTimeWithInterval() {
-  if (autoSwitchingIsPauesed) return;
+  if (autoSwitchingIsPauesed || autoSwitchingIsPauesed) return;
   selectedPartnersPage++;
-  console.log(selectedPartnersPage);
 
   updatePartnerImgs();
   updateNavDots();
   slideLeftOrRight(selectedPartnersPage - 1, selectedPartnersPage);
 }
 
-setInterval(updateTimeWithInterval, 3000);
+setInterval(updateTimeWithInterval, 2500);
 
 function updatePartnerImgs() {
   if (selectedPartnersPage === -1) selectedPartnersPage = 2;
@@ -122,7 +159,6 @@ function updateNavDots() {
   navDots[selectedPartnersPage].style.backgroundColor = '#fff';
 }
 
-const partnerArrows = document.querySelectorAll('.partner-arrow');
 partnerArrows.forEach(el => {
   el.addEventListener('mouseenter', function () {
     const path = el.querySelector('path');
@@ -141,13 +177,17 @@ const slidersContainer = document.querySelector(
 );
 
 function slideLeftOrRight(oldValue, newValue) {
+  selectedPartnersPage = newValue < 0 ? 2 : newValue > 2 ? 0 : newValue;
+
   if (newValue - oldValue > 0) {
     switchSide = 'right';
-    updateSlider(switchSide, newValue);
+    updateSlider(switchSide, selectedPartnersPage);
+    updateNavDots();
   }
   if (newValue - oldValue < 0) {
     switchSide = 'left';
-    updateSlider(switchSide, newValue);
+    updateSlider(switchSide, selectedPartnersPage);
+    updateNavDots();
   }
 }
 
@@ -161,7 +201,6 @@ function updateSlider(side, pageIndex) {
     const partnersMobileImgs = Array.from({ length: 3 }, () =>
       document.createElement('img')
     ).map((image, imgIndex) => {
-      console.log(image);
       image.classList.add('partners-mobile-img');
       partnersRightBox.append(image);
       if (pageIndex === 0) {
@@ -211,7 +250,6 @@ function updateSlider(side, pageIndex) {
     const partnersMobileImgs = Array.from({ length: 3 }, () =>
       document.createElement('img')
     ).map((image, imgIndex) => {
-      console.log(image);
       image.classList.add('partners-mobile-img');
       partnersLeftBox.append(image);
       if (pageIndex === 0) {
@@ -254,7 +292,57 @@ function updateSlider(side, pageIndex) {
       partnersCenterBox.remove();
     }, 1000);
   }
+  draggingIsPaused = true;
+  handleTurnOnDragging();
 }
+
+///////////////////////////////dragging slide/////////////////////////////
+// selectedPartnersPage
+let isDragging = false;
+let startX = 0;
+let dragSide;
+
+function handleTouchStart(e) {
+  isDragging = true;
+  startX = e.touches[0].clientX;
+  autoSwitchingIsPauesed = true;
+}
+
+function handleTurnOnDragging() {
+  setTimeout(() => (draggingIsPaused = false), 1050);
+}
+
+function handleTouchMove(e) {
+  autoSwitchingIsPauesed = true;
+
+  if (!isDragging || draggingIsPaused) return;
+
+  currentX = e.touches[0].clientX;
+  const differenceBetweenStartAndCurrent = currentX - startX;
+
+  if (Math.abs(differenceBetweenStartAndCurrent) >= 100) {
+    if (differenceBetweenStartAndCurrent > 0)
+      slideLeftOrRight(selectedPartnersPage, --selectedPartnersPage);
+    else slideLeftOrRight(selectedPartnersPage, ++selectedPartnersPage);
+    draggingIsPaused = true;
+    handleTurnOnDragging();
+  }
+  clearTimeout(delayAutoSwitching);
+  delayAutoSwitching = setTimeout(() => (autoSwitchingIsPauesed = false), 6000);
+}
+
+function handleTouchEnd() {
+  isDragging = false;
+  autoSwitchingIsPauesed = true;
+}
+
+slidersContainer.addEventListener('touchstart', handleTouchStart, {
+  passive: true,
+});
+slidersContainer.addEventListener('touchmove', handleTouchMove, {
+  passive: true,
+});
+slidersContainer.addEventListener('touchend', handleTouchEnd);
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -378,7 +466,7 @@ function hamburgerMenuAnimations() {
     throwAwayDarkBackground();
     hamburgerMenuDarkBackground.style.backgroundColor = '#ffffff00';
 
-    mobileNavButton.style.zIndex = '3';
+    mobileNavButton.style.zIndex = '8';
   } else {
     mobileNavButtonIsActive = true;
 
@@ -409,6 +497,6 @@ function hamburgerMenuAnimations() {
     hamburgerMenuDarkBackground.style.left = '0%';
     hamburgerMenuDarkBackground.style.backgroundColor = '#1616169e';
 
-    mobileNavButton.style.zIndex = '4';
+    mobileNavButton.style.zIndex = '10';
   }
 }

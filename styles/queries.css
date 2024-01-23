@@ -2,6 +2,7 @@
   * {
     max-width: 320px;
   }
+
   .main-section {
     padding: 0 2rem;
   }
@@ -97,6 +98,7 @@
   .partners-section {
     padding-top: 2.3rem;
     padding-bottom: 0.8rem;
+    height: 43.5rem;
   }
 
   .partners-section-header {
@@ -191,6 +193,9 @@
     gap: 1.5rem;
   }
 
+  .div-for-auto-switching-pause {
+    display: none;
+  }
   /*  ////////////////////////////////////////////////////////////////// */
 
   .frequent-questions-section {
