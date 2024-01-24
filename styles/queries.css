@@ -107,6 +107,7 @@
 
   .partners-section-header {
     font-size: 1.8rem;
+    margin-left: 2rem;
   }
   /* //////////////////////////slider///////////////////////////////////*/
 
@@ -255,5 +256,9 @@
 
   .mobile-footer {
     display: inline-block;
+  }
+
+  .main-section:nth-child(2) {
+    padding: 0;
   }
 }

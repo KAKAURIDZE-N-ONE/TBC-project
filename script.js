@@ -20,7 +20,7 @@ function screenScrolledpixels() {
 
   if (windowWidth > 320) return;
 
-  if (window.scrollY > oldScrolledPixels) {
+  if (window.scrollY > oldScrolledPixels && window.scrollY !== 0) {
     navBar.style.top = '-6.9rem';
     mobileNavButton.style.top = '-6.9rem';
   } else {
