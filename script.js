@@ -18,9 +18,9 @@ function screenScrolledpixels() {
     navBar.classList.remove('nav-bar-second-color');
   }
 
-  if (windowWidth > 320) return;
+  if (windowWidth > 320 || window.scrollY <= 0) return;
 
-  if (window.scrollY > oldScrolledPixels && window.scrollY <= 0) {
+  if (window.scrollY > oldScrolledPixels) {
     navBar.style.top = '-6.9rem';
     mobileNavButton.style.top = '-6.9rem';
   } else {
