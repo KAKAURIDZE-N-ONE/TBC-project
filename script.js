@@ -131,7 +131,7 @@ if (leftArrow)
   });
 
 function updateTimeWithInterval() {
-  if (autoSwitchingIsPauesed || autoSwitchingIsPauesed) return;
+  if (autoSwitchingIsPauesed || draggingIsPaused) return;
   selectedPartnersPage++;
 
   updatePartnerImgs();
@@ -308,8 +308,11 @@ function handleTouchStart(e) {
   autoSwitchingIsPauesed = true;
 }
 
+let cancelDragging;
+
 function handleTurnOnDragging() {
-  setTimeout(() => (draggingIsPaused = false), 1050);
+  clearTimeout(cancelDragging);
+  cancelDragging = setTimeout(() => (draggingIsPaused = false), 1050);
 }
 
 function handleTouchMove(e) {
@@ -324,9 +327,8 @@ function handleTouchMove(e) {
     if (differenceBetweenStartAndCurrent > 0)
       slideLeftOrRight(selectedPartnersPage, --selectedPartnersPage);
     else slideLeftOrRight(selectedPartnersPage, ++selectedPartnersPage);
-    draggingIsPaused = true;
-    handleTurnOnDragging();
   }
+
   clearTimeout(delayAutoSwitching);
   delayAutoSwitching = setTimeout(() => (autoSwitchingIsPauesed = false), 6000);
 }
@@ -387,6 +389,8 @@ function handleResizeScreen() {
 
   windowWidth = width;
 
+  if (windowWidth > 320) document.body.style.overflowY = 'scroll';
+
   if (width <= 340) updateQuestionsForMobile();
   else updateQuestionsForComputer();
 }
@@ -442,7 +446,7 @@ function hamburgerMenuAnimations() {
   if (mobileNavButtonIsActive) {
     mobileNavButtonIsActive = false;
 
-    document.body.style.overflowY = 'scroll';
+    // document.body.style.overflowY = 'scroll';
 
     mobileNavButton.style.transform = 'rotate(0deg)';
 
@@ -470,7 +474,7 @@ function hamburgerMenuAnimations() {
   } else {
     mobileNavButtonIsActive = true;
 
-    document.body.style.overflowY = 'hidden';
+    // document.body.style.overflowY = 'hidden';
 
     mobileNavButton.style.transform = 'rotate(-45deg)';
 
@@ -498,5 +502,22 @@ function hamburgerMenuAnimations() {
     hamburgerMenuDarkBackground.style.backgroundColor = '#1616169e';
 
     mobileNavButton.style.zIndex = '10';
+  }
+}
+//////////////////////////////////////////////////////////////
+function toggleMenu() {
+  var body = document.body;
+  if (mobileNavButtonIsActive) body.classList.remove('freeze-scroll');
+  else body.classList.add('freeze-scroll');
+
+  if (body.classList.contains('freeze-scroll')) {
+    // Store the current scroll position
+    body.setAttribute('data-scroll', window.scrollY || window.pageYOffset);
+  } else {
+    // Remove the top offset when unfreezing
+    body.style.top = 'auto';
+    // Set back the scroll position when unfreezing
+    var scrollPosition = body.getAttribute('data-scroll');
+    window.scrollTo(0, scrollPosition || 0);
   }
 }

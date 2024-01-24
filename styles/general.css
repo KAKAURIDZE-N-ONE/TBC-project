@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wdth,wght@62.5..100,100..900&display=swap');
+@import url('mobileNavBar.css');
 
 * {
   box-sizing: border-box;
@@ -17,105 +18,6 @@ body {
 
 header {
   position: relative;
-}
-
-.menu-button-for-mobile {
-  display: flex;
-  position: fixed;
-  align-items: center;
-  justify-content: center;
-  height: 6.9rem;
-  top: 0;
-  right: 2.2rem;
-  z-index: 5;
-  transition: transform 0.3s, top 0.8s;
-}
-
-.pieces-box {
-  width: 2.6rem;
-  height: 2.1rem;
-  position: relative;
-}
-
-.top-piece {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #dbdbdb;
-  height: 0.3rem;
-  width: 50%;
-  transition: all 0.3s;
-  border-radius: 100px;
-}
-
-.center-piece {
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  background-color: #dbdbdb;
-  height: 0.3rem;
-  width: 100%;
-  transition: all 0.3s;
-  border-radius: 100px;
-}
-
-.bottom-piece {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: #dbdbdb;
-  height: 0.3rem;
-  width: 50%;
-  transition: all 0.3s;
-  border-radius: 100px;
-}
-
-.hamburger-menu {
-  position: fixed;
-  width: 20rem;
-  z-index: 9;
-  height: 100vh;
-  background-color: #212121;
-  right: -100%;
-  transform: translate(-50%, 0);
-  transition: all 0.4s;
-}
-
-.relative-cont-for-menu-list {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.hamburger-menu-list {
-  position: absolute;
-  top: 9.5rem;
-  right: 1.8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 3.3rem;
-  list-style: none;
-  text-align: end;
-  transition: all 0.4s;
-}
-
-.hamburger-menu-list li {
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: #f4f4f4;
-  white-space: nowrap;
-}
-
-.hamburger-menu-dark-background {
-  position: fixed;
-  top: 0;
-  left: 100%;
-  background-color: #ffffff00;
-  width: 100vw;
-  height: 100vh;
-  z-index: 4;
-  transition: background-color 0.8s;
 }
 
 .main-section {
@@ -145,4 +47,8 @@ header {
 
 .margin-top {
   margin-top: 3rem;
+}
+
+body.freeze-scroll {
+  overflow: hidden;
 }

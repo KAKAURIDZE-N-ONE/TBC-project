@@ -1,0 +1,50 @@
+.menu-button-for-mobile {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  height: 6.9rem;
+  top: 0;
+  right: 2.2rem;
+  z-index: 5;
+  transition: transform 0.3s, top 0.8s;
+}
+
+.pieces-box {
+  width: 2.6rem;
+  height: 2.1rem;
+  position: relative;
+}
+
+.top-piece {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #dbdbdb;
+  height: 0.3rem;
+  width: 50%;
+  transition: all 0.3s;
+  border-radius: 100px;
+}
+
+.center-piece {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  background-color: #dbdbdb;
+  height: 0.3rem;
+  width: 100%;
+  transition: all 0.3s;
+  border-radius: 100px;
+}
+
+.bottom-piece {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #dbdbdb;
+  height: 0.3rem;
+  width: 50%;
+  transition: all 0.3s;
+  border-radius: 100px;
+}
