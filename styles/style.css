@@ -59,7 +59,7 @@
 .hero-section {
   height: 35.2rem;
 
-  background-image: url('/TBC-project/imgs/TBC\ HERO\ BG.webp');
+  background-image: url('./imgs/TBC\ HERO\ BG.webp');
   background-size: cover;
   background-position: center;
 }

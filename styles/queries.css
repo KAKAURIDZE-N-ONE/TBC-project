@@ -3,6 +3,10 @@
     max-width: 320px;
   }
 
+  .menu-button-for-mobile {
+    display: flex;
+  }
+
   .main-section {
     padding: 0 2rem;
   }
@@ -250,10 +254,6 @@
   }
 
   .mobile-footer {
-    display: inline-block;
-  }
-
-  .menu-button-for-mobile {
     display: inline-block;
   }
 }

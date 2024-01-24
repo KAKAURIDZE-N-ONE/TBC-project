@@ -21,11 +21,11 @@ function screenScrolledpixels() {
   if (windowWidth > 320) return;
 
   if (window.scrollY > oldScrolledPixels) {
-    navBar.style.top = '-30%';
-    mobileNavButton.style.top = '-20%';
+    navBar.style.top = '-6.9rem';
+    mobileNavButton.style.top = '-6.9rem';
   } else {
     navBar.style.top = '0';
-    mobileNavButton.style.top = '2.3rem';
+    mobileNavButton.style.top = '0';
   }
 
   oldScrolledPixels = window.scrollY;
@@ -204,7 +204,7 @@ function updateSlider(side, pageIndex) {
       image.classList.add('partners-mobile-img');
       partnersRightBox.append(image);
       if (pageIndex === 0) {
-        image.src = `/TBC-project/imgs/partners/${
+        image.src = `./imgs/partners/${
           imgIndex === 0
             ? 'usaid.webp'
             : imgIndex === 1
@@ -215,7 +215,7 @@ function updateSlider(side, pageIndex) {
           imgIndex === 0 ? '21.9rem' : imgIndex === 1 ? '20rem' : '25rem';
       }
       if (pageIndex === 1) {
-        image.src = `/TBC-project/imgs/partners/${
+        image.src = `./imgs/partners/${
           imgIndex === 0
             ? 'tegeta.webp'
             : imgIndex === 1
@@ -226,7 +226,7 @@ function updateSlider(side, pageIndex) {
           imgIndex === 0 ? '18rem' : imgIndex === 1 ? '13.1rem' : '22rem';
       }
       if (pageIndex === 2 && imgIndex === 1) {
-        image.src = '/TBC-project/imgs/partners/ufc.webp';
+        image.src = './imgs/partners/ufc.webp';
         image.style.width = '23.2rem';
       }
     });
@@ -253,7 +253,7 @@ function updateSlider(side, pageIndex) {
       image.classList.add('partners-mobile-img');
       partnersLeftBox.append(image);
       if (pageIndex === 0) {
-        image.src = `/TBC-project/imgs/partners/${
+        image.src = `./imgs/partners/${
           imgIndex === 0
             ? 'usaid.webp'
             : imgIndex === 1
@@ -264,7 +264,7 @@ function updateSlider(side, pageIndex) {
           imgIndex === 0 ? '21.9rem' : imgIndex === 1 ? '20rem' : '25rem';
       }
       if (pageIndex === 1) {
-        image.src = `/TBC-project/imgs/partners/${
+        image.src = `./imgs/partners/${
           imgIndex === 0
             ? 'tegeta.webp'
             : imgIndex === 1
@@ -275,7 +275,7 @@ function updateSlider(side, pageIndex) {
           imgIndex === 0 ? '18rem' : imgIndex === 1 ? '13.1rem' : '22rem';
       }
       if (pageIndex === 2 && imgIndex === 1) {
-        image.src = '/TBC-project/imgs/partners/ufc.webp';
+        image.src = './imgs/partners/ufc.webp';
         image.style.width = '23.2rem';
       }
     });
@@ -320,7 +320,7 @@ function handleTouchMove(e) {
   currentX = e.touches[0].clientX;
   const differenceBetweenStartAndCurrent = currentX - startX;
 
-  if (Math.abs(differenceBetweenStartAndCurrent) >= 100) {
+  if (Math.abs(differenceBetweenStartAndCurrent) >= 50) {
     if (differenceBetweenStartAndCurrent > 0)
       slideLeftOrRight(selectedPartnersPage, --selectedPartnersPage);
     else slideLeftOrRight(selectedPartnersPage, ++selectedPartnersPage);
