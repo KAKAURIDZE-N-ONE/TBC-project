@@ -2,28 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- This meta tag and queries.css together are making responsive web design.  -->
     <meta
       name="viewport"
       content="width=320, user-scalable=yes"
       id="wixMobileViewport"
     />
     <title>TBC x USAID</title>
-    <link rel="stylesheet" href="styles/general.css" />
-    <link rel="stylesheet" href="styles/style.css" />
-    <link rel="stylesheet" href="styles/queries.css" />
+    <link rel="stylesheet" href="./styles/general.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="./styles/queries.css" />
     <link
       rel="icon"
       sizes="192x192"
       href="https://static.wixstatic.com/media/93e8a3_03d83d668a5f417ca646a5e511f8c02a~mv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/93e8a3_03d83d668a5f417ca646a5e511f8c02a~mv2.png"
       type="image/png"
     />
-    <script defer src="script.js"></script>
-    <script defer src="mobileNavAndHamburgerMenu.js"></script>
+    <script defer src="./js/sliders.js"></script>
+    <script defer src="./js/navBarAndHamburgerMenu.js"></script>
+    <script defer src="./js/frequentQuestions.js"></script>
+    <script defer src="./js/functions.js"></script>
   </head>
   <body>
-
     <header>
-
       <!-- mobile hamburger menu button -->
       <div class="menu-button-for-mobile">
         <div class="pieces-box">
@@ -33,7 +35,7 @@
         </div>
       </div>
 
-       <!-- mobile hamburger menu -->
+      <!-- mobile hamburger menu -->
       <div class="hamburger-menu">
         <div class="relative-cont-for-menu-list">
           <ul class="hamburger-menu-list">
@@ -46,10 +48,7 @@
       </div>
 
       <!-- dark background when hamburger menu is active -->
-       <div class="hamburger-menu-dark-background" />
-
-      </div>
-      </div>
+      <div class="hamburger-menu-dark-background"></div>
 
       <!-- div to fill fixed nav bar background space when it is scrolled on top -->
       <div class="nav-bar-backround-div"></div>
@@ -73,21 +72,19 @@
           <h2 class="secondary-header">ტექნოლოგიური განათლებისთვის</h2>
         </div>
       </div>
-
     </header>
 
     <main>
-
       <section class="learn-more-section">
         <div class="wrapper">
-          <p>
+          <p class="page-description">
             „ TBC x USAID - ტექნოლოგიური განათლებისთვის “ პროგრამა საინფორმაციო
             ტექნოლოგიებით დაინტერესებულ ადამიანებს გთავაზობთ სრულად დაფინანსებულ
             ონლაინ საგანმანათლებლო პრაქტიკულ კურსებს სხვადასხვა ICT
             მიმართულებით. წარმატებულ კურსდამთავრებულებს ეძლევათ შესაძლებლობა
             დასაქმდნენ თიბისისა და მის პარტნიორ კომპანიებში.
           </p>
-          <a>გაიგე მეტი</a>
+          <a class="learn-more-link">გაიგე მეტი</a>
         </div>
       </section>
 
@@ -125,10 +122,7 @@
                 <h3 class="course-header">React</h3>
                 <h2>რეგისტრაცია დასრულებულია</h2>
                 <div>
-                  <img
-                    class="right-arrow"
-                    src="./svgs/right-arrow.svg"
-                  />
+                  <img class="right-arrow" src="./svgs/right-arrow.svg" />
                   <h1>კურსის დეტალები</h1>
                 </div>
               </div>
@@ -144,10 +138,7 @@
                 <h3 class="course-header">Intro to Python</h3>
                 <h2>რეგისტრაცია დასრულებულია</h2>
                 <div>
-                  <img
-                    class="right-arrow"
-                    src="./svgs/right-arrow.svg"
-                  />
+                  <img class="right-arrow" src="./svgs/right-arrow.svg" />
                   <h1>კურსის დეტალები</h1>
                 </div>
               </div>
@@ -163,10 +154,7 @@
                 <h3 class="course-header">Advanced Python</h3>
                 <h2>რეგისტრაცია დასრულებულია</h2>
                 <div>
-                  <img
-                    class="right-arrow"
-                    src="./svgs/right-arrow.svg"
-                  />
+                  <img class="right-arrow" src="./svgs/right-arrow.svg" />
                   <h1>კურსის დეტალები</h1>
                 </div>
               </div>
@@ -182,10 +170,7 @@
                 <h3 class="course-header">Advanced Cybersecurity Course</h3>
                 <h2>რეგისტრაცია დასრულებულია</h2>
                 <div>
-                  <img
-                    class="right-arrow"
-                    src="./svgs/right-arrow.svg"
-                  />
+                  <img class="right-arrow" src="./svgs/right-arrow.svg" />
                   <h1>კურსის დეტალები</h1>
                 </div>
               </div>
@@ -201,10 +186,7 @@
                 <h3 class="course-header">ToT - Training of Trainers</h3>
                 <h2>რეგისტრაცია დასრულებულია</h2>
                 <div>
-                  <img
-                    class="right-arrow"
-                    src="./svgs/right-arrow.svg"
-                  />
+                  <img class="right-arrow" src="./svgs/right-arrow.svg" />
                   <h1>კურსის დეტალები</h1>
                 </div>
               </div>
@@ -220,10 +202,7 @@
                 <h3 class="course-header">Blockchain</h3>
                 <h2>რეგისტრაცია დასრულებულია</h2>
                 <div>
-                  <img
-                    class="right-arrow"
-                    src="./svgs/right-arrow.svg"
-                  />
+                  <img class="right-arrow" src="./svgs/right-arrow.svg" />
                   <h1>კურსის დეტალები</h1>
                 </div>
               </div>
@@ -239,10 +218,7 @@
                 <h3 class="course-header">DevOps</h3>
                 <h2>რეგისტრაცია დასრულებულია</h2>
                 <div>
-                  <img
-                    class="right-arrow"
-                    src="./svgs/right-arrow.svg"
-                  />
+                  <img class="right-arrow" src="./svgs/right-arrow.svg" />
                   <h1>კურსის დეტალები</h1>
                 </div>
               </div>
@@ -258,31 +234,31 @@
                 <h3 class="course-header">Information Security Governance</h3>
                 <h2>რეგისტრაცია დასრულებულია</h2>
                 <div>
-                  <img
-                    class="right-arrow"
-                    src="./svgs/right-arrow.svg"
-                  />
+                  <img class="right-arrow" src="./svgs/right-arrow.svg" />
                   <h1>კურსის დეტალები</h1>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
-
       <!-- slider of computer screen version -->
       <section class="partners-section">
-        <!-- when you hover this div slider is pausing -->
+        <img
+          class="partner-left-arrow partner-arrow"
+          src="./svgs/partner-arrow.svg"
+          alt="partner-left-arrow"
+        />
+        <img
+          class="partner-right-arrow partner-arrow"
+          src="./svgs/partner-arrow.svg"
+          alt="partner right arrow"
+        />
+        <!-- when you hover this slider div it is pausing -->
         <div class="div-for-auto-switching-pause"></div>
-        <div class="wrapper ">
+        <div class="wrapper">
           <h1 class="partners-section-header">პროექტის პარტნიორები</h1>
           <div class="partners-container">
-            <img
-              class="partner-left-arrow partner-arrow"
-              src="./svgs/partner-arrow.svg"
-              alt="partner-left-arrow"
-            />
             <div class="partners-imgs-container">
               <img
                 class="partner-img-1 partner-img"
@@ -327,31 +303,24 @@
                 width="312"
               />
             </div>
-            <img
-              class="partner-right-arrow partner-arrow"
-              src="./svgs/partner-arrow.svg"
-              alt="partner right arrow"
-            />
           </div>
 
           <!-- partners slider for mobile version -->
-            <div class="partners-container-for-mobile">
-              <div class="partners-center-box ">
-                <img style="width: 21.9rem" src="./imgs/partners/usaid.webp" />
-                <img style="width: 20rem" src="./imgs/partners/space int.webp" />
-                <img style="width: 25rem" src="./imgs/partners/tineti.webp" />
-              </div>
+          <div class="partners-container-for-mobile">
+            <div class="partners-center-box">
+              <img style="width: 21.9rem" src="./imgs/partners/usaid.webp" />
+              <img style="width: 20rem" src="./imgs/partners/space int.webp" />
+              <img style="width: 25rem" src="./imgs/partners/tineti.webp" />
             </div>
-            
+          </div>
         </div>
-         <!-- this dots are navigators of partners slider -->
-         <div class="dots-for-navigation-partners">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-         </div>
+        <!-- this dots are navigators of partners slider -->
+        <div class="dots-for-navigation-partners">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
       </section>
-
       <!-- section of frequent questions -->
       <section class="frequent-questions-section">
         <div class="wrapper">
@@ -466,21 +435,16 @@
             </div>
           </div>
         </div>
-        <div style="text-align: center;"> 
+        <div style="text-align: center">
           <h1 class="all-question-txt-for-mobile">ყველა კითხვა</h1>
         </div>
       </section>
     </main>
-
     <!-- footer of computer screen version -->
     <footer class="footer">
       <div class="wrapper relative">
         <div class="flex justify-between">
-          <img
-            class="tbc-logo-img"
-            src="./imgs/TBC logo.webp"
-            alt="tbc logo"
-          />
+          <img class="tbc-logo-img" src="./imgs/TBC logo.webp" alt="tbc logo" />
           <div class="ytb-fc-logos-cont">
             <img
               src="./imgs/facebook logo.webp"
@@ -499,8 +463,7 @@
         <button class="txt-us-btn">მოგვწერეთ</button>
       </div>
     </footer>
-
-     <!-- mobile version footer -->
+    <!-- mobile version footer -->
     <footer class="mobile-footer">
       <div class="mobile-footer-container">
         <img

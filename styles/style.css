@@ -19,7 +19,7 @@
   align-items: center;
   justify-content: center;
   z-index: 3;
-  transition: background-color 0.5s, top 0.8s;
+  transition: background-color 0.5s, top 0.5s;
 }
 
 .nav-bar-second-color {
@@ -87,7 +87,7 @@
   background-color: #2b2b2b;
 }
 
-.learn-more-section div p {
+.page-description {
   font-size: 2.65rem;
   line-height: 4.5rem;
   font-weight: 500;
@@ -95,7 +95,7 @@
   color: #f4f4f4;
 }
 
-.learn-more-section div a {
+.learn-more-link {
   text-decoration: none;
   font-size: 2rem;
   font-weight: 700;
@@ -105,7 +105,7 @@
   transition: color 0.4s;
 }
 
-.learn-more-section div a:hover {
+.learn-more-link:hover {
   color: #b0b0b0;
   cursor: pointer;
 }
@@ -290,19 +290,20 @@
 .partner-arrow {
   cursor: pointer;
   z-index: 2;
+  top: 19.5rem;
 }
 
 .partner-left-arrow {
   cursor: pointer;
   position: absolute;
-  left: -16.5rem;
+  left: 10rem;
 }
 
 .partner-right-arrow {
   cursor: pointer;
   position: absolute;
   transform: rotate(180deg);
-  right: -16.5rem;
+  right: 10rem;
 }
 
 .frequent-questions-section {
