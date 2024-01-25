@@ -107,6 +107,7 @@
 
 .learn-more-section div a:hover {
   color: #b0b0b0;
+  cursor: pointer;
 }
 
 .learning-courses-section {
@@ -324,14 +325,18 @@
   cursor: pointer;
 }
 
-.all-question {
+.all-question-txt {
   color: #00aef3;
   font-size: 2rem;
   transition: color 0.4s;
 }
 
-.all-question:hover,
-.all-question:active {
+.all-question-txt-for-mobile {
+  display: none;
+}
+
+.all-question-txt:hover,
+.all-question-txt:active {
   color: #b0b0b0;
   cursor: pointer;
 }

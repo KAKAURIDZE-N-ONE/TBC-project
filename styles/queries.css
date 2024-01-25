@@ -228,10 +228,21 @@
     padding: 0;
   }
 
-  .all-question {
-    text-align: center;
+  .all-question-txt {
+    display: none;
+  }
+
+  .all-question-txt-for-mobile {
+    display: inline-block;
     font-size: 1.6rem;
-    margin-top: 6rem;
+    color: #00aef3;
+    margin-top: 5rem;
+    transition: color 0.4s;
+  }
+
+  .all-question-txt-for-mobile:hover {
+    cursor: pointer;
+    color: #b0b0b0;
   }
 
   .txt-us-btn {

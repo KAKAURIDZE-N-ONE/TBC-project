@@ -6,9 +6,6 @@ const navBar = document.querySelector('.nav-bar-box');
 const mobileNavButton = document.querySelector('.menu-button-for-mobile');
 
 const questionFixedHeigh = 80;
-
-let windowWidth;
-
 let oldScrolledPixels = 0;
 
 function screenScrolledpixels() {
@@ -18,7 +15,7 @@ function screenScrolledpixels() {
     navBar.classList.remove('nav-bar-second-color');
   }
 
-  if (windowWidth > 320 || window.scrollY <= 0) return;
+  if (window.innerWidth > 320 || window.scrollY <= 0) return;
 
   window.scrollY > oldScrolledPixels
     ? pullUpAndDownMobileNavBar('up')
@@ -28,7 +25,6 @@ function screenScrolledpixels() {
 }
 
 window.addEventListener('scroll', screenScrolledpixels);
-
 screenScrolledpixels();
 
 //////////////////////////////////mobile nav bar moving on scroll//////////////////////////
@@ -157,7 +153,6 @@ function updateNavDots() {
 
 partnerArrows.forEach(el => {
   el.addEventListener('mouseenter', function () {
-    const path = el.querySelector('path');
     el.src = 'svgs/partner-arrow-hover.svg';
   });
   el.addEventListener('mouseleave', function () {
@@ -167,7 +162,6 @@ partnerArrows.forEach(el => {
 
 ////////////////////////////partners animation for mobile/////////////////////
 let switchSide;
-
 const slidersContainer = document.querySelector(
   '.partners-container-for-mobile'
 );
@@ -185,105 +179,23 @@ function slideLeftOrRight(oldValue, newValue) {
 
 function updateSlider(side, pageIndex) {
   const partnersCenterBox = document.querySelector('.partners-center-box');
+  const partnersLeftOrRightBox = document.createElement('div');
+  partnersLeftOrRightBox.classList.add(`partners-${side}-box`);
+  const partnersMobileImgs = addImgsInsideBoxSlide(
+    partnersLeftOrRightBox,
+    pageIndex
+  );
 
-  if (side === 'right') {
-    const partnersRightBox = document.createElement('div');
-    partnersRightBox.classList.add('partners-right-box');
+  side === 'right'
+    ? slidersContainer.append(partnersLeftOrRightBox)
+    : slidersContainer.prepend(partnersLeftOrRightBox);
 
-    const partnersMobileImgs = Array.from({ length: 3 }, () =>
-      document.createElement('img')
-    ).map((image, imgIndex) => {
-      image.classList.add('partners-mobile-img');
-      partnersRightBox.append(image);
-      if (pageIndex === 0) {
-        image.src = `./imgs/partners/${
-          imgIndex === 0
-            ? 'usaid.webp'
-            : imgIndex === 1
-            ? 'space int.webp'
-            : 'tineti.webp'
-        }`;
-        image.style.width =
-          imgIndex === 0 ? '21.9rem' : imgIndex === 1 ? '20rem' : '25rem';
-      }
-      if (pageIndex === 1) {
-        image.src = `./imgs/partners/${
-          imgIndex === 0
-            ? 'tegeta.webp'
-            : imgIndex === 1
-            ? 'spectre.webp'
-            : 'tibisi.webp'
-        }`;
-        image.style.width =
-          imgIndex === 0 ? '18rem' : imgIndex === 1 ? '13.1rem' : '22rem';
-      }
-      if (pageIndex === 2 && imgIndex === 1) {
-        image.src = './imgs/partners/ufc.webp';
-        image.style.width = '23.2rem';
-      }
-    });
+  addAndRemoveClassesMobileSlider(
+    partnersLeftOrRightBox,
+    partnersCenterBox,
+    side
+  );
 
-    slidersContainer.append(partnersRightBox);
-
-    setTimeout(function () {
-      partnersRightBox.classList.remove('partners-right-box');
-      partnersRightBox.classList.add('partners-center-box');
-      partnersCenterBox.classList.remove('partners-center-box');
-      partnersCenterBox.classList.add('partners-left-box');
-    }, 10);
-    setTimeout(function () {
-      partnersCenterBox.remove();
-    }, 1000);
-  }
-  if (side === 'left') {
-    const partnersLeftBox = document.createElement('div');
-    partnersLeftBox.classList.add('partners-left-box');
-
-    const partnersMobileImgs = Array.from({ length: 3 }, () =>
-      document.createElement('img')
-    ).map((image, imgIndex) => {
-      image.classList.add('partners-mobile-img');
-      partnersLeftBox.append(image);
-      if (pageIndex === 0) {
-        image.src = `./imgs/partners/${
-          imgIndex === 0
-            ? 'usaid.webp'
-            : imgIndex === 1
-            ? 'space int.webp'
-            : 'tineti.webp'
-        }`;
-        image.style.width =
-          imgIndex === 0 ? '21.9rem' : imgIndex === 1 ? '20rem' : '25rem';
-      }
-      if (pageIndex === 1) {
-        image.src = `./imgs/partners/${
-          imgIndex === 0
-            ? 'tegeta.webp'
-            : imgIndex === 1
-            ? 'spectre.webp'
-            : 'tibisi.webp'
-        }`;
-        image.style.width =
-          imgIndex === 0 ? '18rem' : imgIndex === 1 ? '13.1rem' : '22rem';
-      }
-      if (pageIndex === 2 && imgIndex === 1) {
-        image.src = './imgs/partners/ufc.webp';
-        image.style.width = '23.2rem';
-      }
-    });
-
-    slidersContainer.prepend(partnersLeftBox);
-
-    setTimeout(function () {
-      partnersLeftBox.classList.remove('partners-left-box');
-      partnersLeftBox.classList.add('partners-center-box');
-      partnersCenterBox.classList.remove('partners-center-box');
-      partnersCenterBox.classList.add('partners-right-box');
-    }, 10);
-    setTimeout(function () {
-      partnersCenterBox.remove();
-    }, 1000);
-  }
   draggingIsPaused = true;
   handleTurnOnDragging();
 }
@@ -362,43 +274,15 @@ questions.forEach((el, i) => {
   });
 });
 
-/////////////////////////////for questions/////////////////////////////
-const allQuestionTxt = document.querySelector('.all-question');
-const questionsSection = document.querySelector('.frequent-questions-section');
-const flexContainerForAllQuestion = document.querySelector(
-  '.flex-container-for-all-question'
-);
-
-function handleResizeScreen() {
-  window.innerWidth <= 320
-    ? updateQuestionsForMobile()
-    : updateQuestionsForComputer();
-}
-
-window.addEventListener('resize', handleResizeScreen);
-handleResizeScreen();
-
-function updateQuestionsForComputer() {
-  if (allQuestionTxt) allQuestionTxt.remove();
-  flexContainerForAllQuestion.append(allQuestionTxt);
-}
-
-function updateQuestionsForMobile() {
-  if (allQuestionTxt) allQuestionTxt.remove();
-  questionsSection.append(allQuestionTxt);
-}
-
 ////////////////mobile nav button animation and hamburger menu/////////////////////////////////////////////////
 let navButtonIsActive = false;
 let customerCanClickNavButton = true;
 
 const hamburgerMenuList = document.querySelector('.hamburger-menu-list');
 const hamburgerMenu = document.querySelector('.hamburger-menu');
-
 const hamburgerMenuDarkBackground = document.querySelector(
   '.hamburger-menu-dark-background'
 );
-
 const MobileNavButtonTopPiece = document.querySelector('.top-piece');
 const MobileNavButtonCenterPiece = document.querySelector('.center-piece');
 const MobileNavButtonBottomPiece = document.querySelector('.bottom-piece');
@@ -434,7 +318,7 @@ function hamburgerMenuAnimations() {
   hamburgerMenuDarkBackground.style.left = !navButtonIsActive && '0%';
   navButtonIsActive = !navButtonIsActive;
 }
-//////////////////////////////////////////////////////////////
+
 ////////////////////////////////////////////functions/////////////////////////////////////////
 function throwAwayDarkBackground() {
   customerCanClickNavButton = false;
@@ -445,11 +329,59 @@ function throwAwayDarkBackground() {
 }
 
 function pullUpAndDownMobileNavBar(upOrDown) {
-  if (upOrDown === 'up') {
-    navBar.style.top = '-6.9rem';
-    mobileNavButton.style.top = '-6.9rem';
-  } else {
-    navBar.style.top = '0';
-    mobileNavButton.style.top = '0';
-  }
+  navBar.style.top = upOrDown === 'up' ? '-6.9rem' : '0';
+  mobileNavButton.style.top = upOrDown === 'up' ? '-6.9rem' : '0';
+}
+
+function addImgsInsideBoxSlide(partnersRightOrLeftBox, pageIndex) {
+  return Array.from({ length: 3 }, () => document.createElement('img')).map(
+    (image, imgIndex) => {
+      image.classList.add('partners-mobile-img');
+      partnersRightOrLeftBox.append(image);
+      if (pageIndex === 0) {
+        image.src = `./imgs/partners/${
+          imgIndex === 0
+            ? 'usaid.webp'
+            : imgIndex === 1
+            ? 'space int.webp'
+            : 'tineti.webp'
+        }`;
+        image.style.width =
+          imgIndex === 0 ? '21.9rem' : imgIndex === 1 ? '20rem' : '25rem';
+      }
+      if (pageIndex === 1) {
+        image.src = `./imgs/partners/${
+          imgIndex === 0
+            ? 'tegeta.webp'
+            : imgIndex === 1
+            ? 'spectre.webp'
+            : 'tibisi.webp'
+        }`;
+        image.style.width =
+          imgIndex === 0 ? '18rem' : imgIndex === 1 ? '13.1rem' : '22rem';
+      }
+      if (pageIndex === 2 && imgIndex === 1) {
+        image.src = './imgs/partners/ufc.webp';
+        image.style.width = '23.2rem';
+      }
+    }
+  );
+}
+
+function addAndRemoveClassesMobileSlider(
+  partnersLeftOrRightBox,
+  partnersCenterBox,
+  side
+) {
+  setTimeout(function () {
+    partnersLeftOrRightBox.classList.remove(`partners-${side}-box`);
+    partnersLeftOrRightBox.classList.add('partners-center-box');
+    partnersCenterBox.classList.remove('partners-center-box');
+    partnersCenterBox.classList.add(
+      `partners-${side === 'right' ? 'left' : 'right'}-box`
+    );
+  }, 10);
+  setTimeout(function () {
+    partnersCenterBox.remove();
+  }, 1000);
 }
