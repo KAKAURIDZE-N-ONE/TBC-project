@@ -7,7 +7,7 @@
     display: flex;
   }
 
-  .main-section {
+  .wrapper {
     padding: 0 2rem;
   }
 
@@ -258,19 +258,8 @@
     display: inline-block;
   }
 
-  .main-section:nth-child(2) {
+  .wrapper:nth-child(2) {
     padding: 0;
-  }
-
-  .hamburger-menu {
-    position: fixed;
-    width: 20rem;
-    z-index: 9;
-    height: 100vh;
-    background-color: #212121;
-    right: -100%;
-    transform: translate(-50%, 0);
-    transition: all 0.4s;
   }
 
   .relative-cont-for-menu-list {
@@ -298,16 +287,5 @@
     font-weight: 400;
     color: #f4f4f4;
     white-space: nowrap;
-  }
-
-  .hamburger-menu-dark-background {
-    position: fixed;
-    top: 0;
-    left: 100%;
-    background-color: #ffffff00;
-    width: 100vw;
-    height: 100vh;
-    z-index: 4;
-    transition: background-color 0.8s;
   }
 }

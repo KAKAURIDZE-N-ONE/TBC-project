@@ -4,6 +4,7 @@
   background-color: #d4d4d4;
 }
 
+/* hamburger menu dissapearing for computer screen */
 .hamburger-menu-list {
   display: none;
 }
@@ -18,8 +19,7 @@
   align-items: center;
   justify-content: center;
   z-index: 3;
-  transition: background-color 0.5s;
-  transition: top 0.8s;
+  transition: background-color 0.5s, top 0.8s;
 }
 
 .nav-bar-second-color {
@@ -62,7 +62,6 @@
 
 .hero-section {
   height: 35.2rem;
-
   background-image: url('../imgs/TBC\ HERO\ BG.webp');
   background-size: cover;
   background-position: center;
@@ -74,6 +73,7 @@
   font-weight: 900;
   padding-top: 9.6rem;
 }
+
 .secondary-header {
   color: #f4f4f4;
   font-size: 3.4rem;

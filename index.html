@@ -7,8 +7,6 @@
       content="width=320, user-scalable=yes"
       id="wixMobileViewport"
     />
-
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
     <title>TBC x USAID</title>
     <link rel="stylesheet" href="styles/general.css" />
     <link rel="stylesheet" href="styles/style.css" />
@@ -20,37 +18,42 @@
       type="image/png"
     />
     <script defer src="script.js"></script>
+    <script defer src="mobileNavAndHamburgerMenu.js"></script>
   </head>
   <body>
 
     <header>
+
+      <!-- mobile hamburger menu button -->
       <div class="menu-button-for-mobile">
-        <div onclick="toggleMenu()" class="pieces-box">
+        <div class="pieces-box">
           <div class="top-piece"></div>
           <div class="center-piece"></div>
           <div class="bottom-piece"></div>
         </div>
       </div>
 
-       <div class="hamburger-menu">
+       <!-- mobile hamburger menu -->
+      <div class="hamburger-menu">
         <div class="relative-cont-for-menu-list">
-         <ul class="hamburger-menu-list">
+          <ul class="hamburger-menu-list">
             <li>მთავარი</li>
             <li>TBC IT</li>
             <li style="color: #00a3e0">TBC x USAID</li>
             <li>რისკები</li>
           </ul>
         </div>
-       </div>
-       <div class="hamburger-menu-dark-background"></div>
-
-
-        
       </div>
 
+      <!-- dark background when hamburger menu is active -->
+       <div class="hamburger-menu-dark-background" />
+
+      </div>
       </div>
 
+      <!-- div to fill fixed nav bar background space when it is scrolled on top -->
       <div class="nav-bar-backround-div"></div>
+      <!-- computer version nav-bar -->
       <nav class="nav-bar-box">
         <div class="flex align-items logoandul">
           <img class="TBC-logo" src="./svgs/logo.svg" alt="logo" />
@@ -62,16 +65,21 @@
           </ul>
         </div>
       </nav>
+      <!-- hero section -->
       <div class="hero-section">
-        <div class="main-section">
+        <!-- wrapper is fixed size container for all section -->
+        <div class="wrapper">
           <h1 class="main-header">TBC x USAID</h1>
           <h2 class="secondary-header">ტექნოლოგიური განათლებისთვის</h2>
         </div>
       </div>
+
     </header>
+
     <main>
+
       <section class="learn-more-section">
-        <div class="main-section">
+        <div class="wrapper">
           <p>
             „ TBC x USAID - ტექნოლოგიური განათლებისთვის “ პროგრამა საინფორმაციო
             ტექნოლოგიებით დაინტერესებულ ადამიანებს გთავაზობთ სრულად დაფინანსებულ
@@ -82,8 +90,9 @@
           <a>გაიგე მეტი</a>
         </div>
       </section>
+
       <section class="learning-courses-section">
-        <div class="main-section">
+        <div class="wrapper">
           <h2 class="learning-courses-header">სასწავლო კურსები</h2>
           <div class="courses-container">
             <div class="course">
@@ -99,11 +108,13 @@
                   <img
                     class="right-arrow"
                     src="./svgs/right-arrow.svg"
+                    alt="right arrow"
                   />
                   <h1>კურსის დეტალები</h1>
                 </div>
               </div>
             </div>
+
             <div class="course second-col-course">
               <img
                 class="course-img"
@@ -122,6 +133,7 @@
                 </div>
               </div>
             </div>
+
             <div class="course third-col-course">
               <img
                 class="course-img"
@@ -140,6 +152,7 @@
                 </div>
               </div>
             </div>
+
             <div class="course">
               <img
                 class="course-img"
@@ -158,6 +171,7 @@
                 </div>
               </div>
             </div>
+
             <div class="course second-col-course">
               <img
                 class="course-img"
@@ -176,6 +190,7 @@
                 </div>
               </div>
             </div>
+
             <div class="course third-col-course">
               <img
                 class="course-img"
@@ -194,6 +209,7 @@
                 </div>
               </div>
             </div>
+
             <div class="course">
               <img
                 class="course-img"
@@ -212,6 +228,7 @@
                 </div>
               </div>
             </div>
+
             <div class="course second-col-course">
               <img
                 class="course-img"
@@ -230,6 +247,7 @@
                 </div>
               </div>
             </div>
+
             <div class="course third-col-course">
               <img
                 class="course-img"
@@ -248,12 +266,16 @@
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
+
+      <!-- slider of computer screen version -->
       <section class="partners-section">
+        <!-- when you hover this div slider is pausing -->
         <div class="div-for-auto-switching-pause"></div>
-        <div class="main-section ">
+        <div class="wrapper ">
           <h1 class="partners-section-header">პროექტის პარტნიორები</h1>
           <div class="partners-container">
             <img
@@ -312,6 +334,7 @@
             />
           </div>
 
+          <!-- partners slider for mobile version -->
             <div class="partners-container-for-mobile">
               <div class="partners-center-box ">
                 <img style="width: 21.9rem" src="./imgs/partners/usaid.webp" />
@@ -321,14 +344,17 @@
             </div>
             
         </div>
+         <!-- this dots are navigators of partners slider -->
          <div class="dots-for-navigation-partners">
             <div class="dot"></div>
             <div class="dot"></div>
             <div class="dot"></div>
-          </div>
+         </div>
       </section>
+
+      <!-- section of frequent questions -->
       <section class="frequent-questions-section">
-        <div class="main-section">
+        <div class="wrapper">
           <div class="questions-container-and-header">
             <div class="flex justify-between flex-container-for-all-question">
               <h1 class="questions-section-header">ხშირად დასმული კითხვები</h1>
@@ -442,8 +468,10 @@
         </div>
       </section>
     </main>
+
+    <!-- footer of computer screen version -->
     <footer class="footer">
-      <div class="main-section relative">
+      <div class="wrapper relative">
         <div class="flex justify-between">
           <img
             class="tbc-logo-img"
@@ -469,6 +497,7 @@
       </div>
     </footer>
 
+     <!-- mobile version footer -->
     <footer class="mobile-footer">
       <div class="mobile-footer-container">
         <img

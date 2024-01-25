@@ -20,13 +20,9 @@ function screenScrolledpixels() {
 
   if (windowWidth > 320 || window.scrollY <= 0) return;
 
-  if (window.scrollY > oldScrolledPixels) {
-    navBar.style.top = '-6.9rem';
-    mobileNavButton.style.top = '-6.9rem';
-  } else {
-    navBar.style.top = '0';
-    mobileNavButton.style.top = '0';
-  }
+  window.scrollY > oldScrolledPixels
+    ? pullUpAndDownMobileNavBar('up')
+    : pullUpAndDownMobileNavBar('down');
 
   oldScrolledPixels = window.scrollY;
 }
@@ -178,17 +174,13 @@ const slidersContainer = document.querySelector(
 
 function slideLeftOrRight(oldValue, newValue) {
   selectedPartnersPage = newValue < 0 ? 2 : newValue > 2 ? 0 : newValue;
-
   if (newValue - oldValue > 0) {
-    switchSide = 'right';
-    updateSlider(switchSide, selectedPartnersPage);
-    updateNavDots();
+    updateSlider('right', selectedPartnersPage);
   }
   if (newValue - oldValue < 0) {
-    switchSide = 'left';
-    updateSlider(switchSide, selectedPartnersPage);
-    updateNavDots();
+    updateSlider('left', selectedPartnersPage);
   }
+  updateNavDots();
 }
 
 function updateSlider(side, pageIndex) {
@@ -297,10 +289,8 @@ function updateSlider(side, pageIndex) {
 }
 
 ///////////////////////////////dragging slide/////////////////////////////
-// selectedPartnersPage
 let isDragging = false;
 let startX = 0;
-let dragSide;
 
 function handleTouchStart(e) {
   isDragging = true;
@@ -309,7 +299,6 @@ function handleTouchStart(e) {
 }
 
 let cancelDragging;
-
 function handleTurnOnDragging() {
   clearTimeout(cancelDragging);
   cancelDragging = setTimeout(() => (draggingIsPaused = false), 1050);
@@ -317,16 +306,16 @@ function handleTurnOnDragging() {
 
 function handleTouchMove(e) {
   autoSwitchingIsPauesed = true;
+  const PIXELS_NEED_TO_SLIDE = 50;
 
   if (!isDragging || draggingIsPaused) return;
-
   currentX = e.touches[0].clientX;
   const differenceBetweenStartAndCurrent = currentX - startX;
 
-  if (Math.abs(differenceBetweenStartAndCurrent) >= 50) {
-    if (differenceBetweenStartAndCurrent > 0)
-      slideLeftOrRight(selectedPartnersPage, --selectedPartnersPage);
-    else slideLeftOrRight(selectedPartnersPage, ++selectedPartnersPage);
+  if (Math.abs(differenceBetweenStartAndCurrent) >= PIXELS_NEED_TO_SLIDE) {
+    differenceBetweenStartAndCurrent > 0
+      ? slideLeftOrRight(selectedPartnersPage, --selectedPartnersPage)
+      : slideLeftOrRight(selectedPartnersPage, ++selectedPartnersPage);
   }
 
   clearTimeout(delayAutoSwitching);
@@ -346,11 +335,10 @@ slidersContainer.addEventListener('touchmove', handleTouchMove, {
 });
 slidersContainer.addEventListener('touchend', handleTouchEnd);
 
-////////////////////////////////////////////////////////////////////////////////
-
 //////////////////////////////////////////////////////////////////////
 const questions = document.querySelectorAll('.question-txt-and-arrow-box');
 const questionsArrows = document.querySelectorAll('.question-arrow');
+const ALL_NEED_PLUS_HEIGHT = 11.5;
 
 questions.forEach((el, i) => {
   el.addEventListener('click', function (e) {
@@ -367,7 +355,7 @@ questions.forEach((el, i) => {
 
     if (Number(activeQuestionHeight) === questionFixedHeigh) {
       activeQuestion.style.height = `${
-        activeQuestionAnswerHeight / 10 + 11.5
+        activeQuestionAnswerHeight / 10 + ALL_NEED_PLUS_HEIGHT
       }rem`;
       activeArrow.classList.add('question-arrow-rotate');
     }
@@ -382,21 +370,12 @@ const flexContainerForAllQuestion = document.querySelector(
 );
 
 function handleResizeScreen() {
-  width =
-    window.innerWidth ||
-    document.documentElement.clientWidth ||
-    document.body.clientWidth;
-
-  windowWidth = width;
-
-  if (windowWidth > 320) document.body.style.overflowY = 'scroll';
-
-  if (width <= 340) updateQuestionsForMobile();
-  else updateQuestionsForComputer();
+  window.innerWidth <= 320
+    ? updateQuestionsForMobile()
+    : updateQuestionsForComputer();
 }
 
 window.addEventListener('resize', handleResizeScreen);
-
 handleResizeScreen();
 
 function updateQuestionsForComputer() {
@@ -410,11 +389,10 @@ function updateQuestionsForMobile() {
 }
 
 ////////////////mobile nav button animation and hamburger menu/////////////////////////////////////////////////
-let mobileNavButtonIsActive = false;
+let navButtonIsActive = false;
 let customerCanClickNavButton = true;
 
 const hamburgerMenuList = document.querySelector('.hamburger-menu-list');
-
 const hamburgerMenu = document.querySelector('.hamburger-menu');
 
 const hamburgerMenuDarkBackground = document.querySelector(
@@ -425,13 +403,39 @@ const MobileNavButtonTopPiece = document.querySelector('.top-piece');
 const MobileNavButtonCenterPiece = document.querySelector('.center-piece');
 const MobileNavButtonBottomPiece = document.querySelector('.bottom-piece');
 
-mobileNavButton.addEventListener('click', function () {
-  hamburgerMenuAnimations();
-});
-hamburgerMenuDarkBackground.addEventListener('click', function () {
-  hamburgerMenuAnimations();
-});
+mobileNavButton.addEventListener('click', hamburgerMenuAnimations);
+hamburgerMenuDarkBackground.addEventListener('click', hamburgerMenuAnimations);
 
+function hamburgerMenuAnimations() {
+  if (!customerCanClickNavButton) return;
+
+  MobileNavButtonTopPiece.classList.toggle(
+    'rotate-mobile-nav-button-top-piece'
+  );
+  MobileNavButtonBottomPiece.classList.toggle(
+    'rotate-mobile-nav-button-bottom-piece'
+  );
+  hamburgerMenu.classList.toggle('pull-left-hamburger-menu');
+
+  document.body.style.overflowY = navButtonIsActive ? 'scroll' : 'hidden';
+  mobileNavButton.style.transform = navButtonIsActive
+    ? 'rotate(0deg)'
+    : 'rotate(-45deg)';
+  MobileNavButtonCenterPiece.style.backgroundColor = navButtonIsActive
+    ? '#dbdbdb'
+    : '#767676';
+  hamburgerMenuList.style.right = navButtonIsActive ? '21.8rem' : '1.8rem';
+  mobileNavButton.style.zIndex = navButtonIsActive ? '8' : '10';
+  navButtonIsActive && window.scrollY > 0 && pullUpAndDownMobileNavBar('up');
+  navButtonIsActive && throwAwayDarkBackground();
+  hamburgerMenuDarkBackground.style.backgroundColor = navButtonIsActive
+    ? '#ffffff00'
+    : '#1616169e';
+  hamburgerMenuDarkBackground.style.left = !navButtonIsActive && '0%';
+  navButtonIsActive = !navButtonIsActive;
+}
+//////////////////////////////////////////////////////////////
+////////////////////////////////////////////functions/////////////////////////////////////////
 function throwAwayDarkBackground() {
   customerCanClickNavButton = false;
   const timeout = setTimeout(function () {
@@ -440,84 +444,12 @@ function throwAwayDarkBackground() {
   }, 600);
 }
 
-function hamburgerMenuAnimations() {
-  if (!customerCanClickNavButton) return;
-
-  if (mobileNavButtonIsActive) {
-    mobileNavButtonIsActive = false;
-
-    // document.body.style.overflowY = 'scroll';
-
-    mobileNavButton.style.transform = 'rotate(0deg)';
-
-    MobileNavButtonTopPiece.style.left = '0';
-    MobileNavButtonTopPiece.style.top = '0';
-    MobileNavButtonTopPiece.style.transform = 'unset';
-
-    MobileNavButtonBottomPiece.style.right = '0';
-    MobileNavButtonBottomPiece.style.bottom = '0';
-    MobileNavButtonBottomPiece.style.transform = 'unset';
-
-    MobileNavButtonTopPiece.style.backgroundColor = '#dbdbdb';
-    MobileNavButtonCenterPiece.style.backgroundColor = '#dbdbdb';
-    MobileNavButtonBottomPiece.style.backgroundColor = '#dbdbdb';
-
-    hamburgerMenuList.style.right = '21.8rem';
-
-    hamburgerMenu.style.right = '-20rem';
-    hamburgerMenu.style.backgroundColor = '#ffffff00';
-
-    throwAwayDarkBackground();
-    hamburgerMenuDarkBackground.style.backgroundColor = '#ffffff00';
-
-    mobileNavButton.style.zIndex = '8';
+function pullUpAndDownMobileNavBar(upOrDown) {
+  if (upOrDown === 'up') {
+    navBar.style.top = '-6.9rem';
+    mobileNavButton.style.top = '-6.9rem';
   } else {
-    mobileNavButtonIsActive = true;
-
-    // document.body.style.overflowY = 'hidden';
-
-    mobileNavButton.style.transform = 'rotate(-45deg)';
-
-    MobileNavButtonTopPiece.style.left = '50%';
-    MobileNavButtonTopPiece.style.top = '11.47%';
-    MobileNavButtonTopPiece.style.transform =
-      'translate(-50%,0) rotate(-90deg)';
-
-    MobileNavButtonBottomPiece.style.right = '50%';
-    MobileNavButtonBottomPiece.style.bottom = '11.47%';
-    MobileNavButtonBottomPiece.style.transform =
-      'translate(50%,0) rotate(-90deg)';
-
-    MobileNavButtonTopPiece.style.backgroundColor = '#767676';
-    MobileNavButtonCenterPiece.style.backgroundColor = '#767676';
-    MobileNavButtonBottomPiece.style.backgroundColor = '#767676';
-
-    hamburgerMenu.style.right = '0';
-    hamburgerMenu.style.transform = 'translate(0,0)';
-    hamburgerMenu.style.backgroundColor = '#212121';
-
-    hamburgerMenuList.style.right = '1.8rem';
-
-    hamburgerMenuDarkBackground.style.left = '0%';
-    hamburgerMenuDarkBackground.style.backgroundColor = '#1616169e';
-
-    mobileNavButton.style.zIndex = '10';
-  }
-}
-//////////////////////////////////////////////////////////////
-function toggleMenu() {
-  var body = document.body;
-  if (mobileNavButtonIsActive) body.classList.remove('freeze-scroll');
-  else body.classList.add('freeze-scroll');
-
-  if (body.classList.contains('freeze-scroll')) {
-    // Store the current scroll position
-    body.setAttribute('data-scroll', window.scrollY || window.pageYOffset);
-  } else {
-    // Remove the top offset when unfreezing
-    body.style.top = 'auto';
-    // Set back the scroll position when unfreezing
-    var scrollPosition = body.getAttribute('data-scroll');
-    window.scrollTo(0, scrollPosition || 0);
+    navBar.style.top = '0';
+    mobileNavButton.style.top = '0';
   }
 }

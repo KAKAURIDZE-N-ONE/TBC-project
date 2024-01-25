@@ -20,7 +20,7 @@ header {
   position: relative;
 }
 
-.main-section {
+.wrapper {
   max-width: 98rem;
   margin: 0 auto;
 }
@@ -47,8 +47,4 @@ header {
 
 .margin-top {
   margin-top: 3rem;
-}
-
-body.freeze-scroll {
-  overflow: hidden;
 }
