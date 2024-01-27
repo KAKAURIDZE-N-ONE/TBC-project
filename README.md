@@ -48,4 +48,4 @@ maximum scale is 1040px,
 
 Just to be clear my website has all the functionalities as the original one.
 
-You must refresh page every time you change width in inspect element.
+You must refresh page every time you change width in inspect element as original one.
