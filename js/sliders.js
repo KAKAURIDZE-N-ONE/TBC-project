@@ -1,4 +1,4 @@
-//The page starts from the bottom
+//The page starts from the top
 window.onbeforeunload = function () {
   window.scrollTo(0, 0);
 };
