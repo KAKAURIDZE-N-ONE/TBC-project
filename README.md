@@ -44,8 +44,10 @@ cd TBC-project
 ## Additional info
 
 The mobile version of my website has a fixed width of 320px, because TBC x USAID uses the same dimensions.
-maximum scale is 1040px,
+The mobile version is up to 1600 pixels as in the original.
 
 Just to be clear my website has all the functionalities as the original one.
+
+# Important !
 
 You must refresh page every time you change width in inspect element as original one.
